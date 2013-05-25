@@ -5,10 +5,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
       <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="Delivery" nillable="true" type="tns:Delivery" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="OrderDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="OrderItems" nillable="true" type="tns:ArrayOfOrderItem" />
-      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderNumber" type="ser:guid" />
       <xs:element minOccurs="0" name="Store" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Total" nillable="true" type="xs:double" />
       <xs:element minOccurs="0" name="Warehouse" nillable="true" type="xs:string" />
@@ -123,6 +124,7 @@
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankAccountNumber" type="xs:int" />
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -165,12 +167,18 @@
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:ArrayOfUser" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Role" nillable="true" type="tns:Role" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
   <xs:complexType name="OrderItem">
     <xs:sequence>
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
@@ -189,12 +197,39 @@
       <xs:element minOccurs="0" name="Genre" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Stocks" nillable="true" type="tns:Stock" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Media" nillable="true" type="tns:Media" />
+  <xs:complexType name="Stock">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Media" nillable="true" type="tns:Media" />
+      <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Warehouse" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Stock" nillable="true" type="tns:Stock" />
+  <xs:complexType name="Delivery">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
+      <xs:element minOccurs="0" name="DestinationAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalDeliveryIdentifier" type="ser:guid" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Order" nillable="true" type="tns:Order" />
+      <xs:element minOccurs="0" name="SourceAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Delivery" nillable="true" type="tns:Delivery" />
   <xs:complexType name="ArrayOfOrderItem">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItem" nillable="true" type="tns:OrderItem" />

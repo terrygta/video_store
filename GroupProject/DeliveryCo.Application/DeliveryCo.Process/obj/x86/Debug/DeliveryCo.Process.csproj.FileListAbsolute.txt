@@ -42,3 +42,25 @@ C:\Documents and Settings\msla2391\Desktop\group project\GroupProject(1)\Deliver
 C:\Documents and Settings\msla2391\Desktop\group project\GroupProject(1)\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\msla2391\Desktop\group project\GroupProject(1)\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\DeliveryCo.Process.exe
 C:\Documents and Settings\msla2391\Desktop\group project\GroupProject(1)\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\DeliveryCo.Process.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Process.exe.config
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Process.exe
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Process.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Components.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Components.Interfaces.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Services.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Services.Interfaces.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.Unity.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.Unity.ServiceLocatorAdapter.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\Microsoft.Practices.Unity.StaticFactory.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Entities.dll
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Components.Interfaces.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Components.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Services.Interfaces.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Services.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\bin\Debug\DeliveryCo.Business.Entities.pdb
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\DeliveryCo.Process.exe
+D:\study\COMP5348\group\GroupProject\DeliveryCo.Application\DeliveryCo.Process\obj\x86\Debug\DeliveryCo.Process.pdb
