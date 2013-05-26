@@ -94,3 +94,7 @@ D:\study\COMP5348\group\GroupProject\VideoStore.Services\bin\Debug\Common.pdb
 D:\study\COMP5348\group\GroupProject\VideoStore.Services\obj\Debug\ResolveAssemblyReference.cache
 D:\study\COMP5348\group\GroupProject\VideoStore.Services\obj\Debug\VideoStore.Services.dll
 D:\study\COMP5348\group\GroupProject\VideoStore.Services\obj\Debug\VideoStore.Services.pdb
+D:\study\COMP5348\group\GroupProject\VideoStore.Services\bin\Debug\Bank.Business.Entities.dll
+D:\study\COMP5348\group\GroupProject\VideoStore.Services\bin\Debug\Bank.Services.Interfaces.dll
+D:\study\COMP5348\group\GroupProject\VideoStore.Services\bin\Debug\Bank.Business.Entities.pdb
+D:\study\COMP5348\group\GroupProject\VideoStore.Services\bin\Debug\Bank.Services.Interfaces.pdb

@@ -6,12 +6,8 @@
         <xs:element minOccurs="0" name="pAmount" type="xs:double" />
         <xs:element minOccurs="0" name="pFromAcctNumber" type="xs:int" />
         <xs:element minOccurs="0" name="pToAcctNumber" type="xs:int" />
+        <xs:element minOccurs="0" name="pResultReturnAddress" nillable="true" type="xs:string" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TransferResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

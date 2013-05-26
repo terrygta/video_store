@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CatalogueService.cs" />
     <Compile Include="DeliveryNotificationService.cs" />
+    <Compile Include="TransferNotificationService.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="OrderService.cs" />
@@ -55,6 +56,14 @@
     <Compile Include="StockService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bank.Business\Bank.Business.Entities\Bank.Business.Entities.csproj">
+      <Project>{4BB64DAE-6F81-4E3D-A2BD-41075F28F15F}</Project>
+      <Name>Bank.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bank.Services\Bank.Services.Interfaces\Bank.Services.Interfaces.csproj">
+      <Project>{3317F30A-A62C-474D-8D2B-B91605ECF202}</Project>
+      <Name>Bank.Services.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DeliveryCo.Services\DeliveryCo.Services.Interfaces\DeliveryCo.Services.Interfaces.csproj">
       <Project>{7E7A8D7D-87CF-420F-A72B-8F4A258BB48A}</Project>
       <Name>DeliveryCo.Services.Interfaces</Name>

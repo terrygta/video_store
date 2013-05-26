@@ -154,3 +154,7 @@ D:\study\COMP5348\group\GroupProject\VideoStore.Process\bin\Debug\DeliveryCo.Bus
 D:\study\COMP5348\group\GroupProject\VideoStore.Process\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\study\COMP5348\group\GroupProject\VideoStore.Process\obj\x86\Debug\VideoStore.Process.exe
 D:\study\COMP5348\group\GroupProject\VideoStore.Process\obj\x86\Debug\VideoStore.Process.pdb
+D:\study\COMP5348\group\GroupProject\VideoStore.Process\bin\Debug\Bank.Services.Interfaces.dll
+D:\study\COMP5348\group\GroupProject\VideoStore.Process\bin\Debug\Bank.Business.Entities.dll
+D:\study\COMP5348\group\GroupProject\VideoStore.Process\bin\Debug\Bank.Services.Interfaces.pdb
+D:\study\COMP5348\group\GroupProject\VideoStore.Process\bin\Debug\Bank.Business.Entities.pdb

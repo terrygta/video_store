@@ -16,15 +16,19 @@ using VideoStore.Business.Entities;
 using System.Transactions;
 using System.ServiceModel.Description;
 using VideoStore.Business.Components.Interfaces;
+using System.Messaging;
 
 namespace VideoStore.Process
 {
     public class Program
     {
+        private static readonly String bankTransferQueuePath = ".\\private$\\TransferNotificationQueueTransacted";
+
         static void Main(string[] args)
         {
             ResolveDependencies();
             InsertDummyEntities();
+            EnsureQueueExists();
             HostServices();
         }
 
@@ -199,6 +203,13 @@ namespace VideoStore.Process
         private static String GetAssemblyQualifiedServiceName(String pServiceName)
         {
             return String.Format("{0}, {1}", pServiceName, System.Configuration.ConfigurationManager.AppSettings["ServiceAssemblyName"].ToString());
+        }
+
+        private static void EnsureQueueExists()
+        {
+            // Create the transacted MSMQ queue if necessary.
+            if (!MessageQueue.Exists(bankTransferQueuePath))
+                MessageQueue.Create(bankTransferQueuePath, true);
         }
     }
 }

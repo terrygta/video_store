@@ -74,6 +74,7 @@
     <Compile Include="Stock.cs">
       <DependentUpon>VideoEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TransferOutcome.cs" />
     <Compile Include="User.cs">
       <DependentUpon>VideoEntityModel.tt</DependentUpon>
     </Compile>

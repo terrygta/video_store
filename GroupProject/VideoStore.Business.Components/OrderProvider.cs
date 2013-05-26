@@ -25,6 +25,7 @@ namespace VideoStore.Business.Components
             {
                 try
                 {
+                    Console.WriteLine("Invoke submit");
                     pOrder.OrderNumber = Guid.NewGuid();
                     TransferFundsFromCustomer(pOrder.Customer.BankAccountNumber, pOrder.Total ?? 0.0);
                     PlaceDeliveryForOrder(pOrder);
@@ -80,7 +81,8 @@ namespace VideoStore.Business.Components
         private void TransferFundsFromCustomer(int pCustomerAccountNumber, double pTotal)
         {
             TransferServiceClient lClient = new TransferServiceClient();
-            lClient.Transfer(pTotal, pCustomerAccountNumber, RetrieveVideoStoreAccountNumber());
+            String orderServiceAddress = "net.msmq://localhost/private/TransferNotificationQueueTransacted";
+            lClient.Transfer(pTotal, pCustomerAccountNumber, RetrieveVideoStoreAccountNumber(), orderServiceAddress);
         }
 
 
