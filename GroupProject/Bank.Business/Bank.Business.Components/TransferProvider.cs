@@ -13,12 +13,13 @@ namespace Bank.Business.Components
     {
 
 
-        public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, String pResultReturnAddress)
+        public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, String reference, String pResultReturnAddress)
         {
+            IOperationOutcomeService lOutcomeService = OperationOutcomeServiceFactory.GetOperationOutcomeService(pResultReturnAddress);
+            OperationOutcome outcome = new OperationOutcome(){ Outcome = OperationOutcome.OperationOutcomeResult.Successful };
             using (TransactionScope lScope = new TransactionScope())
             using (BankEntityModelContainer lContainer = new BankEntityModelContainer())
             {
-                IOperationOutcomeService lOutcomeService = OperationOutcomeServiceFactory.GetOperationOutcomeService(pResultReturnAddress);
                 try
                 {
                     Console.WriteLine("Invoke transferring");
@@ -32,15 +33,16 @@ namespace Bank.Business.Components
                     lContainer.ObjectStateManager.ChangeObjectState(lToAcct, System.Data.EntityState.Modified);
                     lContainer.SaveChanges();
                     lScope.Complete();
-                    lOutcomeService.NotifyOperationOutcome(new OperationOutcome() { Outcome = OperationOutcome.OperationOutcomeResult.Successful });
                 }
                 catch (Exception lException)
                 {
                     Console.WriteLine("Error occured while transferring money:  " + lException.Message);
-                    //throw;
-                    lOutcomeService.NotifyOperationOutcome(new OperationOutcome() { Outcome = OperationOutcome.OperationOutcomeResult.Failure, Message = lException.Message });
+                    //throw;                   
+                    outcome.Outcome = OperationOutcome.OperationOutcomeResult.Failure;
+                    outcome.Message = "Error occured while transferring money:  " + lException.Message;
                 }
             }
+            lOutcomeService.NotifyOperationOutcome(reference, outcome);
         }
 
         private Account GetAccountFromNumber(int pToAcctNumber)

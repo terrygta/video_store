@@ -27,18 +27,56 @@ namespace VideoStore.Business.Components
                 {
                     Console.WriteLine("Invoke submit");
                     pOrder.OrderNumber = Guid.NewGuid();
-                    TransferFundsFromCustomer(pOrder.Customer.BankAccountNumber, pOrder.Total ?? 0.0);
-                    PlaceDeliveryForOrder(pOrder);
-                    lContainer.Orders.ApplyChanges(pOrder);
                     pOrder.UpdateStockLevels();
+                    lContainer.Orders.ApplyChanges(pOrder);
                     lContainer.SaveChanges();
+                    TransferFundsFromCustomer(pOrder.Customer.BankAccountNumber, pOrder.Total ?? 0.0, pOrder.OrderNumber.ToString());
+                    //PlaceDeliveryForOrder(pOrder);
+                    //lContainer.Orders.ApplyChanges(pOrder);
+                    //pOrder.UpdateStockLevels();
+                    //lContainer.SaveChanges();
                     lScope.Complete();
-                    SendOrderPlacedConfirmation(pOrder);
+                    //SendOrderPlacedConfirmation(pOrder);
                 }
                 catch (Exception lException)
                 {
                     SendOrderErrorMessage(pOrder, lException);
                     throw;
+                }
+            }
+        }
+
+        public void NotifyTransferCompletion(String reference, TransferOutcome outcome)
+        {
+            Order lAffectedOrder = RetrieveOrder(new Guid(reference));
+            if (outcome.Outcome == TransferOutcome.TransferOutcomeResult.Failure)
+            {
+                using (TransactionScope lScope = new TransactionScope())
+                using (VideoStoreEntityModelContainer lContainer = new VideoStoreEntityModelContainer())
+                {
+                    Console.WriteLine("Rolling Back");
+                    lAffectedOrder.RollbackStockLevels();
+                    lContainer.Orders.ApplyChanges(lAffectedOrder);
+                    lScope.Complete();
+                }
+            }
+            else
+            {
+                using (TransactionScope lScope = new TransactionScope())
+                using (VideoStoreEntityModelContainer lContainer = new VideoStoreEntityModelContainer())
+                {
+                    try
+                    {
+                        PlaceDeliveryForOrder(lAffectedOrder);
+                        lContainer.Orders.ApplyChanges(lAffectedOrder);
+                        lScope.Complete();
+                        SendOrderPlacedConfirmation(lAffectedOrder);
+                    }
+                    catch (Exception lException)
+                    {
+                        SendOrderErrorMessage(lAffectedOrder, lException);
+                        throw;
+                    }
                 }
             }
         }
@@ -78,11 +116,11 @@ namespace VideoStore.Business.Components
             
         }
 
-        private void TransferFundsFromCustomer(int pCustomerAccountNumber, double pTotal)
+        private void TransferFundsFromCustomer(int pCustomerAccountNumber, double pTotal, String reference)
         {
             TransferServiceClient lClient = new TransferServiceClient();
             String orderServiceAddress = "net.msmq://localhost/private/TransferNotificationQueueTransacted";
-            lClient.Transfer(pTotal, pCustomerAccountNumber, RetrieveVideoStoreAccountNumber(), orderServiceAddress);
+            lClient.Transfer(pTotal, pCustomerAccountNumber, RetrieveVideoStoreAccountNumber(), reference, orderServiceAddress);
         }
 
 
@@ -92,6 +130,13 @@ namespace VideoStore.Business.Components
             return 123;
         }
 
-
+        private Order RetrieveOrder(Guid Id)
+        {
+            using (VideoStoreEntityModelContainer lContainer = new VideoStoreEntityModelContainer())
+            {
+                Order lOrder = lContainer.Orders.Include("Customer").Where((pOrder) => pOrder.OrderNumber == Id).FirstOrDefault();
+                return lOrder;
+            }
+        }
     }
 }

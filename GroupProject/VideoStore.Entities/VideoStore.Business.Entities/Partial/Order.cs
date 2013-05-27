@@ -21,5 +21,13 @@ namespace VideoStore.Business.Entities
                 }
             }
         }
+
+        public void RollbackStockLevels()
+        {
+            foreach (OrderItem lItem in this.OrderItems)
+            {
+                lItem.Media.Stocks.Quantity += lItem.Quantity;
+            }
+        }
     }
 }

@@ -12,15 +12,15 @@ namespace VideoStore.Services
 {
     class TransferNotificationService : IOperationOutcomeService
     {
-        ITransferNotificationProvider Provider
+        IOrderProvider Provider
         {
-            get { return ServiceLocator.Current.GetInstance<ITransferNotificationProvider>(); }
+            get { return ServiceLocator.Current.GetInstance<IOrderProvider>(); }
         }
 
-        public void NotifyOperationOutcome(OperationOutcome pOutcome) 
+        public void NotifyOperationOutcome(String reference, OperationOutcome pOutcome) 
         {
             Console.WriteLine("Received tranfer outcome");
-            Provider.NotifyTransferCompletion(getOutcome(pOutcome));
+            Provider.NotifyTransferCompletion(reference, getOutcome(pOutcome));
         }
 
         private TransferOutcome getOutcome(OperationOutcome pOutcome)

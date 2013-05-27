@@ -16,7 +16,7 @@ namespace VideoStore.Business.Components.TransferService {
     public interface ITransferService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ITransferService/Transfer")]
-        void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, string pResultReturnAddress);
+        void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, string reference, string pResultReturnAddress);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -46,8 +46,8 @@ namespace VideoStore.Business.Components.TransferService {
                 base(binding, remoteAddress) {
         }
         
-        public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, string pResultReturnAddress) {
-            base.Channel.Transfer(pAmount, pFromAcctNumber, pToAcctNumber, pResultReturnAddress);
+        public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, string reference, string pResultReturnAddress) {
+            base.Channel.Transfer(pAmount, pFromAcctNumber, pToAcctNumber, reference, pResultReturnAddress);
         }
     }
 }

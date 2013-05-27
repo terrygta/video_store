@@ -11,8 +11,19 @@ namespace Bank.Business.Components
     {
         public static IOperationOutcomeService GetOperationOutcomeService(String pAddress)
         {
-            ChannelFactory<IOperationOutcomeService> lChannelFactory = new ChannelFactory<IOperationOutcomeService>(new NetMsmqBinding(), new EndpointAddress(pAddress));
-            return lChannelFactory.CreateChannel();
+            IOperationOutcomeService foo;
+            try
+            {
+                ChannelFactory<IOperationOutcomeService> lChannelFactory =
+                    new ChannelFactory<IOperationOutcomeService>(new NetMsmqBinding("NetMsmqBinding_IOperationOutcomeService"), new EndpointAddress(pAddress));
+                foo = lChannelFactory.CreateChannel();
+            }
+            catch (Exception lException)
+            {
+                Console.WriteLine("Error:  " + lException.Message);
+                throw;
+            }
+            return foo;
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Bank.Services.Interfaces
     public interface IOperationOutcomeService
     {
         [OperationContract(IsOneWay = true)]
-        void NotifyOperationOutcome(OperationOutcome pOutcome); 
+        void NotifyOperationOutcome(String reference, OperationOutcome pOutcome); 
     }
 }
