@@ -69,6 +69,7 @@ namespace VideoStore.Business.Components
                     {
                         PlaceDeliveryForOrder(lAffectedOrder);
                         lContainer.Orders.ApplyChanges(lAffectedOrder);
+                        lContainer.SaveChanges();
                         lScope.Complete();
                         SendOrderPlacedConfirmation(lAffectedOrder);
                     }
@@ -134,7 +135,7 @@ namespace VideoStore.Business.Components
         {
             using (VideoStoreEntityModelContainer lContainer = new VideoStoreEntityModelContainer())
             {
-                Order lOrder = lContainer.Orders.Include("Customer").Where((pOrder) => pOrder.OrderNumber == Id).FirstOrDefault();
+                Order lOrder = lContainer.Orders.Include("Customer").Include("OrderItems.Media").Where((pOrder) => pOrder.OrderNumber == Id).FirstOrDefault();
                 return lOrder;
             }
         }
