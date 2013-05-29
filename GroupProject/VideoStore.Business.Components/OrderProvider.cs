@@ -28,6 +28,7 @@ namespace VideoStore.Business.Components
                     Console.WriteLine("Invoke submit");
                     pOrder.OrderNumber = Guid.NewGuid();
                     pOrder.UpdateStockLevels();
+                   // pOrder.RollbackStockLevels();
                     lContainer.Orders.ApplyChanges(pOrder);
                     lContainer.SaveChanges();
                     TransferFundsFromCustomer(pOrder.Customer.BankAccountNumber, pOrder.Total ?? 0.0, pOrder.OrderNumber.ToString());
@@ -56,8 +57,14 @@ namespace VideoStore.Business.Components
                 {
                     Console.WriteLine("Rolling Back");
                     lAffectedOrder.RollbackStockLevels();
-                    lContainer.Orders.ApplyChanges(lAffectedOrder);
+                    foreach (OrderItem lItem in lAffectedOrder.OrderItems)
+                    {
+                        lContainer.Stocks.Attach(lItem.Media.Stocks);
+                        lContainer.ObjectStateManager.ChangeObjectState(lItem.Media.Stocks, System.Data.EntityState.Modified);
+                        lContainer.SaveChanges();
+                    }
                     lScope.Complete();
+                    SendOrderErrorMessage(lAffectedOrder, new Exception(outcome.Message));
                 }
             }
             else
@@ -135,7 +142,7 @@ namespace VideoStore.Business.Components
         {
             using (VideoStoreEntityModelContainer lContainer = new VideoStoreEntityModelContainer())
             {
-                Order lOrder = lContainer.Orders.Include("Customer").Include("OrderItems.Media").Where((pOrder) => pOrder.OrderNumber == Id).FirstOrDefault();
+                Order lOrder = lContainer.Orders.Include("Customer").Include("OrderItems.Media.Stocks").Where((pOrder) => pOrder.OrderNumber == Id).FirstOrDefault();
                 return lOrder;
             }
         }

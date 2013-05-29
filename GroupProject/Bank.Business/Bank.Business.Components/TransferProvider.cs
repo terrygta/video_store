@@ -17,7 +17,7 @@ namespace Bank.Business.Components
         {
             IOperationOutcomeService lOutcomeService = OperationOutcomeServiceFactory.GetOperationOutcomeService(pResultReturnAddress);
             OperationOutcome outcome = new OperationOutcome(){ Outcome = OperationOutcome.OperationOutcomeResult.Successful };
-            using (TransactionScope lScope = new TransactionScope())
+            //using (TransactionScope lScope = new TransactionScope())
             using (BankEntityModelContainer lContainer = new BankEntityModelContainer())
             {
                 try
@@ -32,7 +32,7 @@ namespace Bank.Business.Components
                     lContainer.ObjectStateManager.ChangeObjectState(lFromAcct, System.Data.EntityState.Modified);
                     lContainer.ObjectStateManager.ChangeObjectState(lToAcct, System.Data.EntityState.Modified);
                     lContainer.SaveChanges();
-                    lScope.Complete();
+                    //lScope.Complete();
                 }
                 catch (Exception lException)
                 {
@@ -40,6 +40,7 @@ namespace Bank.Business.Components
                     //throw;                   
                     outcome.Outcome = OperationOutcome.OperationOutcomeResult.Failure;
                     outcome.Message = "Error occured while transferring money:  " + lException.Message;
+                    //lScope.Dispose();
                 }
             }
             lOutcomeService.NotifyOperationOutcome(reference, outcome);
