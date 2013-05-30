@@ -16,8 +16,8 @@ namespace Bank.Business.Components
         public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, String reference, String pResultReturnAddress)
         {
             IOperationOutcomeService lOutcomeService = OperationOutcomeServiceFactory.GetOperationOutcomeService(pResultReturnAddress);
-            OperationOutcome outcome = new OperationOutcome(){ Outcome = OperationOutcome.OperationOutcomeResult.Successful };
-            //using (TransactionScope lScope = new TransactionScope())
+            OperationOutcome outcome = new OperationOutcome();
+            using (TransactionScope lScope = new TransactionScope())
             using (BankEntityModelContainer lContainer = new BankEntityModelContainer())
             {
                 try
@@ -32,7 +32,8 @@ namespace Bank.Business.Components
                     lContainer.ObjectStateManager.ChangeObjectState(lFromAcct, System.Data.EntityState.Modified);
                     lContainer.ObjectStateManager.ChangeObjectState(lToAcct, System.Data.EntityState.Modified);
                     lContainer.SaveChanges();
-                    //lScope.Complete();
+                    lScope.Complete();
+                    outcome.Outcome = OperationOutcome.OperationOutcomeResult.Successful;
                 }
                 catch (Exception lException)
                 {
@@ -44,6 +45,7 @@ namespace Bank.Business.Components
                 }
             }
             lOutcomeService.NotifyOperationOutcome(reference, outcome);
+            
         }
 
         private Account GetAccountFromNumber(int pToAcctNumber)

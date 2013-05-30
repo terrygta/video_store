@@ -9,6 +9,6 @@
     <h2>CheckOut</h2>
 
     <p>Thankyou <%=Model.Name %> for shopping at video store </p>
-    <p>Your order has been submitted, and will be delivered to <%=Model.Address %> in a few days.</p>
+    <p>Your order has been submitted, and will be delivered to <%=Model.Address %> in a few days if we have successfully received your payment.</p>
 
 </asp:Content>

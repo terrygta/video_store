@@ -16,7 +16,7 @@ namespace Bank.Services
             get { return ServiceLocator.Current.GetInstance<ITransferProvider>(); }
         }
 
-        [OperationBehavior(TransactionScopeRequired=true)]
+        [OperationBehavior(TransactionScopeRequired=false)]
         public void Transfer(double pAmount, int pFromAcctNumber, int pToAcctNumber, String reference, String pResultReturnAddress)
         {
             TransferProvider.Transfer(pAmount, pFromAcctNumber, pToAcctNumber, reference, pResultReturnAddress);
